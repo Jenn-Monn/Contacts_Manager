@@ -11,9 +11,6 @@ public class contacts {
         numbers = new ArrayList<>();
     }
 
-    public void addPhoneNumbers() {
-        numbers.add(number);
-    }
 
     public String getContactName(String prompt) {
         return contact;
@@ -29,5 +26,32 @@ public class contacts {
 
     public int getNumber() {
         return number;
+    }
+
+    public void addPhoneNumbers(int number) {
+        numbers.add(number);
+    }
+
+    public void addContactName() {
+        String name = input.getString("What is the new Contact name?");
+
+        contacts contact = makeContact();
+
+        contact.put(name, number);
+    }
+
+    protected contacts makeContact() {
+        String name = input.getString("Please enter the Contact Name: ");
+
+        contacts contact = new contacts(name);
+
+        do {
+            number = input.getInt("Please enter a phone number for " + name + ".");
+
+            contact.addPhoneNumbers(number);
+
+        } while (input.yesNo("Do you want to add more contacts and their numbers?"));
+
+        return contact;
     }
 }
