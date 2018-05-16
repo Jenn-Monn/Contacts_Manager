@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -14,9 +15,24 @@ public class FileIO {
         String directory = "data";
         String filename = "contacts.txt";
 
-//                createNewFile( directory, filename);
+                createNewFile( directory, filename);
 
-//        ArrayList<String> contacts =
+        ArrayList<String> contacts = makeContacts();
+        System.out.println(contacts);
+
+        try {
+
+            writeContactsToFile(contacts, directory, filename);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+
+            readContacts(directory, filename);
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -44,6 +60,18 @@ public class FileIO {
 
         Path filepath = Paths.get(directory, filename);
         Files.write(filepath, list, StandardOpenOption.APPEND);
+
+    }
+
+
+    public static void readContacts(String directory, String filename) throws IOException{
+        Path filepath = Paths.get(directory, filename);
+
+        List<String> list = Files.readAllLines(filepath);
+
+        for(String contact: list){
+            System.out.println(contact);
+        }
 
     }
 
