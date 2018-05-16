@@ -21,8 +21,7 @@ public class Input {
     }
 
     public int getInt(int min, int max) {
-        System.out.println("Enter an integer between " + min + " and " + max);
-        int value = getInt();
+        int value = getInt("Enter an integer between " + min + " and " + max);
         if (value < min || value > max) {
             return getInt(min, max);
         }
@@ -53,7 +52,7 @@ public class Input {
 //
 //    }
 
-        public int getInt(){
+        public int getInt(String prompt){
             return input.nextInt();
         }
 
