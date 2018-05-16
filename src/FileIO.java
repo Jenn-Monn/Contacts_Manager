@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class FileIO {
 
     public static void main(String[] args) {
-
         String directory = "data";
         String filename = "contacts.txt";
 
@@ -80,7 +79,6 @@ public class FileIO {
         ArrayList<String> list = new ArrayList<>();
         Input input = new Input();
         String contact;
-
 
         contact = input.getString("Please input the contact you want to add to the list");
         list.add(contact);
