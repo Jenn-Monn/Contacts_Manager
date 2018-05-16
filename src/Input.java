@@ -13,7 +13,8 @@ public class Input {
         return input.nextLine();
     }
 
-    public boolean yesNo() {
+    public boolean yesNo(String prompt) {
+        System.out.println(prompt);
         String answer = input.nextLine();
         return "y".equalsIgnoreCase(answer) || "yes".equalsIgnoreCase(answer);
     }

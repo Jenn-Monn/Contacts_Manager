@@ -15,24 +15,27 @@ public class FileIO {
         String directory = "data";
         String filename = "contacts.txt";
 
-                createNewFile( directory, filename);
+//                createNewFile(directory, filename);
 
         ArrayList<String> contacts = makeContacts();
         System.out.println(contacts);
+//
+//
+//        try {
+//
+//            writeContactsToFile(contacts, directory, filename);
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
 
-        try {
+//        try {
+//
+//            readContacts(directory, filename);
+//        } catch (IOException e){
+//            System.out.println(e.getMessage());
+//        }
 
-            writeContactsToFile(contacts, directory, filename);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
 
-        try {
-
-            readContacts(directory, filename);
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-        }
 
     }
 
@@ -81,9 +84,11 @@ public class FileIO {
         Input input = new Input();
         String contact;
 
+        do {
+            contact = input.getString("Please input the contact you want to add to the list");
+            list.add(contact);
 
-        contact = input.getString("Please input the contact you want to add to the list");
-        list.add(contact);
+        } while (input.yesNo("Do you want to add another line to the list? Enter y or Yes to continue:"));
 
 
         return list;
