@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -5,7 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 
 public class FileIO {
@@ -16,7 +17,7 @@ public class FileIO {
 
                 createNewFile( directory, filename);
 
-        ArrayList<String> contacts = makeContacts();
+        ArrayList<Object> contacts = makeContacts();
         System.out.println(contacts);
 
         try {
@@ -55,7 +56,8 @@ public class FileIO {
     }
 
 
-    public static void writeContactsToFile(ArrayList<String> list, String directory, String filename) throws IOException{
+
+    public static void writeContactsToFile(ArrayList<Object> list, String directory, String filename) throws IOException{
 
         Path filepath = Paths.get(directory, filename);
         Files.write(filepath, list, StandardOpenOption.APPEND);
@@ -75,12 +77,14 @@ public class FileIO {
     }
 
 
-    public static ArrayList<String> makeContacts(){
-        ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<Object> makeContacts(){
+        ArrayList<Object> list = new ArrayList<>();
         Input input = new Input();
         String contact;
+        String number;
 
-        contact = input.getString("Please input the contact you want to add to the list");
+        contact = input.getString("Please input the contact you want to add to the list: ");
+        number = input.getString("Please add the phone number for this contact: ");
         list.add(contact);
 
 
