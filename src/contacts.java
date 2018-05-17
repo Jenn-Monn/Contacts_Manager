@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class contacts {
     private String contact;
-    private int number;
-    public ArrayList<Integer> numbers;
+    private String number;
+    public ArrayList<String> numbers;
     Input input = new Input();
 
     public contacts(String contact) {
@@ -24,34 +24,34 @@ public class contacts {
         number = input.getInt("Please enter a phone number for your contact: ");
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void addPhoneNumbers(int number) {
+    public void addPhoneNumbers(String number) {
         numbers.add(number);
     }
 
-    public void addContactName() {
-        String name = input.getString("What is the new Contact name?");
-
-        contacts contact = makeContact();
-
-        contact.put(name, number);
-    }
-
-    protected contacts makeContact() {
-        String name = input.getString("Please enter the Contact Name: ");
-
-        contacts contact = new contacts(name);
-
-        do {
-            number = input.getInt("Please enter a phone number for " + name + ".");
-
-            contact.addPhoneNumbers(number);
-
-        } while (input.yesNo("Do you want to add more contacts and their numbers?"));
-
-        return contact;
-    }
+//    public void addContactName() {
+//        String name = input.getString("What is the new Contact name?");
+//
+//        contacts contact = makeContact();
+//
+////        contact.put(name, number);
+//    }
+//
+//    protected contacts makeContact() {
+//        String name = input.getString("Please enter the Contact Name: ");
+//
+//        contacts contact = new contacts(name);
+//
+//        do {
+//            number = input.getString("Please enter a phone number for " + name + ".");
+//
+//            contact.addPhoneNumbers(number);
+//
+//        } while (input.yesNo("Do you want to add more contacts and their numbers?"));
+//
+//        return contact;
+//    }
 }

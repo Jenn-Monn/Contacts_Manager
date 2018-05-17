@@ -15,9 +15,9 @@ public class FileIO {
         String directory = "data";
         String filename = "contacts.txt";
 
-                createNewFile( directory, filename);
+                createNewFile(directory, filename);
 
-        ArrayList<Object> contacts = makeContacts();
+        ArrayList<String> contacts = makeContacts();
         System.out.println(contacts);
 
         try {
@@ -33,6 +33,7 @@ public class FileIO {
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
+
 
     }
 
@@ -57,7 +58,7 @@ public class FileIO {
 
 
 
-    public static void writeContactsToFile(ArrayList<Object> list, String directory, String filename) throws IOException{
+    public static void writeContactsToFile(ArrayList<String> list, String directory, String filename) throws IOException{
 
         Path filepath = Paths.get(directory, filename);
         Files.write(filepath, list, StandardOpenOption.APPEND);
@@ -77,16 +78,25 @@ public class FileIO {
     }
 
 
-    public static ArrayList<Object> makeContacts(){
-        ArrayList<Object> list = new ArrayList<>();
+    public static ArrayList<String> makeContacts(){
+        ArrayList<String> list = new ArrayList<>();
         Input input = new Input();
-        String contact;
+
+        String name;
         String number;
+        String fullInfo;
+        String answer;
 
-        contact = input.getString("Please input the contact you want to add to the list: ");
+        name = input.getString("Please input the contact you want to add to the list: ");
         number = input.getString("Please add the phone number for this contact: ");
-        list.add(contact);
+        fullInfo = name + ", " + number;
+        list.add(fullInfo);
 
+        answer = input.getString("Would you like to enter another contact?");
+
+        if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")){
+            makeContacts();
+        }
 
         return list;
 
