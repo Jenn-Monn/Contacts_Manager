@@ -32,11 +32,11 @@ public class FileIO {
             System.out.println(e.getMessage());
         }
 
-
+    mainMenu();
 
     }
 
-    public void mainMenu() {
+    public static void mainMenu() {
         Input input = new Input();
         int command;
         command = input.getInt("Welcome to your phone Book!\n" +
@@ -172,14 +172,21 @@ public class FileIO {
             Input input = new Input();
             String answer;
             String name;
-            answer = input.getString("Enter the name of the contact you want to look up").trim().toLowerCase();
-            if(list.contains(answer)) {
-                int i;
-                i = list.indexOf(answer);
-                System.out.println(list.get(i));
-            }else {
-                System.out.println("Sorry, that name isn't in your contacts");
+        System.out.println(list.size());
+            answer = input.getString("Enter the name of the contact you want to look up").trim();
+
+            for (String person: list) {
+                if (person.substring(0, answer.length()).equalsIgnoreCase(answer)){
+
+                }
             }
+//            if(list.contains(answer.substring(0, answer.length()))) {
+//                int i;
+//                i = list.indexOf(answer);
+//                System.out.println(list.get(i));
+//            }else {
+//                System.out.println("Sorry, that name isn't in your contacts");
+//            }
     }
 
 
