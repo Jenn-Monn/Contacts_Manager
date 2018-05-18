@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,38 +11,83 @@ import java.util.List;
 
 
 public class FileIO {
+    static String directory = "data";
+    static String filename = "contacts.txt";
+    Input input = new Input();
 
     public static void main(String[] args) {
-        String directory = "data";
-        String filename = "contacts.txt";
+
 
                 createNewFile(directory, filename);
 
-        System.out.println("Welcome to your Phone Book!");
-        System.out.println("   1.   View all contacts ");
-        System.out.println("   2.   Add a new contact");
-        System.out.println("   3.   Search a contact by name");
-        System.out.println("   4.   Delete an existing contact");
-        System.out.println("   5.   Exit.");
-        System.out.println("Enter an option (1, 2, 3, 4 or 5) :");
-
-        ArrayList<String> contacts = makeContacts();
-        System.out.println(contacts);
-
         try {
+            ArrayList<String> contacts = makeContacts();
 
-            writeContactsToFile(contacts, directory, filename);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-
-            readContacts(directory, filename);
+            try {
+                writeContactsToFile(contacts, directory, filename);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
 
+
+
+    }
+
+    public void mainMenu() {
+        Input input = new Input();
+        int command;
+        command = input.getInt("Welcome to your phone Book!\n" +
+                "   1. View all contacts\n" +
+                "   2.Add a new contact\n" +
+                "   3.Search a contact by name\n" +
+                "   4.Delete an existing contact\n" +
+                "   5. Exit\n" +
+                "   Enter an option (1, 2, 3, 4, or 5) : ");
+
+        switch (command){
+            case 1:
+                try {
+                    readContacts(directory, filename);
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+                break;
+
+            case 2:
+                try{
+                    makeContacts();
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+                break;
+
+            case 3:
+                try {
+                    searchNumber(directory, filename);
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+                break;
+
+            case 4:
+                try {
+                    deleteNumber(directory, filename);
+                    changesInPhoneBook(directory, filename);
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+                break;
+
+            case 5:
+                System.out.println("\nExiting program");
+                break;
+            default:
+                System.out.println("Testing default");
+
+        }
     }
 
 
@@ -61,6 +107,17 @@ public class FileIO {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public static boolean changesInPhoneBook(String directory, String filename){
+        boolean changed = true;
+        Path contactDirectory = Paths.get(directory);
+        Path contactFile = Paths.get(directory, filename);
+        if (changed){
+           contactFile.toAbsolutePath();
+            PrintWriter out;
+            }
+            return changesInPhoneBook(directory, filename);
     }
 
 
@@ -85,7 +142,7 @@ public class FileIO {
     }
 
 
-    public static ArrayList<String> makeContacts(){
+    public static ArrayList<String> makeContacts() throws IOException {
         ArrayList<String> list = new ArrayList<>();
         Input input = new Input();
 
@@ -109,20 +166,39 @@ public class FileIO {
 
     }
 
-
-    public void mainMenu() {
-
+    public static void searchNumber(String directory, String filename) throws IOException {
+        Path filepath = Paths.get(directory, filename);
+        List<String> list = Files.readAllLines(filepath);
+            Input input = new Input();
+            String answer;
+            String name;
+            answer = input.getString("Enter the name of the contact you want to look up").trim().toLowerCase();
+            if(list.contains(answer)) {
+                int i;
+                i = list.indexOf(answer);
+                System.out.println(list.get(i));
+            }else {
+                System.out.println("Sorry, that name isn't in your contacts");
+            }
     }
 
-    public void searchNames() {
-        String name;
-        String result;
 
-        Input input = new Input();
-        name = input.getString("Enter a name to search");
-        result = contacts.
+    public static void deleteNumber(String directory, String filename) throws IOException{
+        Path filepath = Paths.get(directory, filename);
+        List<String> list = Files.readAllLines(filepath);
+        for(int i =0; i < list.size(); i++) {
+            Input input = new Input();
+            String answer;
+            String name;
+            answer = input.getString("Enter the name of the contact you want to delete").trim().toLowerCase();
+            name = list.get(i);
+            if (name == null)
+                System.out.println("\n Sorry, there is no one existing contact for " + answer);
+            else {
+                list.remove(i);
+                System.out.println("\nRecord of contact removed for " + answer);
+            }
+        }
     }
-
-
 
 }
