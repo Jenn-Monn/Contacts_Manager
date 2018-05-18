@@ -25,7 +25,6 @@ public class FileIO {
         System.out.println("   5.   Exit.");
         System.out.println("Enter an option (1, 2, 3, 4 or 5) :");
 
-        ArrayList<Object> contacts = makeContacts();
         ArrayList<String> contacts = makeContacts();
         System.out.println(contacts);
 
@@ -111,7 +110,18 @@ public class FileIO {
     }
 
 
+    public void mainMenu() {
 
+    }
+
+    public void searchNames() {
+        String name;
+        String result;
+
+        Input input = new Input();
+        name = input.getString("Enter a name to search");
+        result = contacts.
+    }
 
 
 
