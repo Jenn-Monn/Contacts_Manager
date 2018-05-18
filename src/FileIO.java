@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,7 +48,6 @@ public class FileIO {
 
                 try{
                     makeContacts();
-                    writeContactsToFile(makeContacts(), directory, filename);
                 }catch (IOException e){
                     System.out.println(e.getMessage());
                 }
@@ -55,7 +55,7 @@ public class FileIO {
 
             case 3:
                 try {
-                    searchNumber();
+                    searchNumber(directory, filename);
                 }catch (IOException e){
                     System.out.println(e.getMessage());
                 }
@@ -63,8 +63,8 @@ public class FileIO {
 
             case 4:
                 try {
-                    deleteNumber();
-                    writeContactsToFile(makeContacts(), directory, filename);
+                    deleteNumber(directory, filename);
+                    changesInPhoneBook(directory, filename);
                 }catch (IOException e){
                     System.out.println(e.getMessage());
                 }
@@ -118,6 +118,17 @@ public class FileIO {
 
     }
 
+    public static boolean changesInPhoneBook(String directory, String filename){
+        boolean changed = true;
+        Path contactDirectory = Paths.get(directory);
+        Path contactFile = Paths.get(directory, filename);
+        if (changed){
+           contactFile.toAbsolutePath();
+            PrintWriter out;
+            }
+            return changesInPhoneBook(directory, filename);
+    }
+
 
 
     public static void writeContactsToFile(ArrayList<String> list, String directory, String filename) throws IOException{
@@ -132,7 +143,6 @@ public class FileIO {
         Path filepath = Paths.get(directory, filename);
 
         List<String> list = Files.readAllLines(filepath);
-
         for(String contact: list){
             System.out.println(contact);
         }
@@ -140,7 +150,7 @@ public class FileIO {
     }
 
 
-    public static ArrayList<String> makeContacts(){
+    public static ArrayList<String> makeContacts() throws IOException{
         ArrayList<String> list = new ArrayList<>();
         Input input = new Input();
 
@@ -164,32 +174,45 @@ public class FileIO {
 
     }
 
-    public static void searchNumber() throws IOException {
-        Input input = new Input();
-        String answer;
-        String number;
-        answer = input.getString("Enter the name of the contact you want to look up");
-        number = makeContacts().get(Integer.parseInt(answer));
-        if(number == null)
-            System.out.println("\nSorry, no number found for " + answer);
-        else
-            System.out.println("\nNumber for " + answer + " : + number");
+    public static void searchNumber(String directory, String filename) throws IOException {
+        Path filepath = Paths.get(directory, filename);
+        List<String> list = Files.readAllLines(filepath);
+        for(int i =0; i < list.size(); i++){
+            Input input = new Input();
+            String answer;
+            String name;
+            answer = input.getString("Enter the name of the contact you want to look up").trim().toLowerCase();
+            name = list.get(i);
+            if(answer == null)
+                System.out.println("\nSorry, no number found for " + answer);
+            else
+                System.out.println("\nNumber for " + answer + " :" + name);
+        }
+
 
     }
 
 
-    public static void deleteNumber() throws IOException{
-        Input input = new Input();
-        String answer;
-        String name;
-        answer = input.getString("Enter the name of the contact you want to delete");
-        name = makeContacts().get(Integer.parseInt(answer));
-        if(name == null)
-            System.out.println("\n Sorry, there is no one existing contact for " + answer);
-        else{
-            makeContacts().remove(answer);
-            System.out.println("\nRecord of contact removed for " + answer);
+    public static void deleteNumber(String directory, String filename) throws IOException{
+        Path filepath = Paths.get(directory, filename);
+        List<String> list = Files.readAllLines(filepath);
+        for(int i =0; i < list.size(); i++) {
+            Input input = new Input();
+            String answer;
+            String name;
+            answer = input.getString("Enter the name of the contact you want to delete").trim().toLowerCase();
+            name = list.get(i);
+            if (name == null)
+                System.out.println("\n Sorry, there is no one existing contact for " + answer);
+            else {
+                list.remove(i);
+                System.out.println("\nRecord of contact removed for " + answer);
+            }
         }
     }
+
+
+
+
 
 }
