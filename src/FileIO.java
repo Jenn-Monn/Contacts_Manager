@@ -1,6 +1,5 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class FileIO {
+
 
     public static void createNewFile(String directory, String filename){
         Path contactDirectory = Paths.get(directory);
@@ -58,7 +57,7 @@ public class FileIO {
     }
 
 
-    public static void makeContacts() throws IOException {
+    public static void makeContacts()throws IOException{
         Input input = new Input();
         String name;
         String number;
@@ -88,8 +87,8 @@ public class FileIO {
                 System.out.println("The information for " + answer + " | is:  |"  + contact + " | ");
             }
         }
-    }
 
+    }
 
     public static void deleteNumber(String directory, String filename, String inputUser) throws IOException{
         Input input = new Input();
@@ -106,8 +105,7 @@ public class FileIO {
         }
     }
 
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         String directory = "data";
         String filename = "contacts.txt";
         Input input = new Input();
@@ -160,10 +158,111 @@ public class FileIO {
                     break;
                     default:
                         System.out.println("Testing default");
-
             }
         } while (!userExit);
 
     }
 
 }
+
+
+//    static String directory = "data";
+//    static String filename = "contacts.txt";
+//    Input input = new Input();
+
+
+//    public static void main(String[] args) {
+//
+//
+//                createNewFile(directory, filename);
+//
+////        try {
+////            ArrayList<String> contacts = makeContacts();
+////
+////            try {
+////                writeContactsToFile(contacts, directory, filename);
+////            } catch (IOException e) {
+////                System.out.println(e.getMessage());
+////            }
+////        } catch (IOException e){
+////            System.out.println(e.getMessage());
+////        }
+////
+////    mainMenu();
+//
+//    }
+//
+//    public static void mainMenu() {
+//        Input input = new Input();
+//        int command;
+//        command = input.getInt("Welcome to your phone Book!\n" +
+//                "   1. View all contacts\n" +
+//                "   2.Add a new contact\n" +
+//                "   3.Search a contact by name\n" +
+//                "   4.Delete an existing contact\n" +
+//                "   5. Exit\n" +
+//                "   Enter an option (1, 2, 3, 4, or 5) : ");
+//
+//        switch (command){
+//            case 1:
+//                try {
+//                    readContacts(directory, filename);
+//                }catch (IOException e){
+//                    System.out.println(e.getMessage());
+//                }
+//                break;
+//
+//            case 2:
+//                try{
+//                    makeContacts();
+//                }catch (IOException e){
+//                    System.out.println(e.getMessage());
+//                }
+//                break;
+//
+//            case 3:
+//                try {
+//                    searchNumber(directory, filename);
+//                }catch (IOException e){
+//                    System.out.println(e.getMessage());
+//                }
+//                break;
+//
+//            case 4:
+//                try {
+//                    deleteNumber(directory, filename, input.getString(""));
+//
+//                }catch (IOException e){
+//                    System.out.println(e.getMessage());
+//                }
+//                break;
+//
+//            case 5:
+//                System.out.println("\nExiting program");
+//                break;
+//            default:
+//                System.out.println("Testing default");
+//
+//        }
+//    }
+
+
+// --------------------- CODE ON SEARCH NUMBER ----------------------
+//Input input = new Input();
+//            String answer;
+//            String name;
+//        System.out.println(list.size());
+//            answer = input.getString("Enter the name of the contact you want to look up").trim();
+//
+//            for (String person: list) {
+//                if (person.substring(0, answer.length()).equalsIgnoreCase(answer)){
+//
+//                }
+//            }
+//            if(list.contains(answer.substring(0, answer.length()))) {
+//                int i;
+//                i = list.indexOf(answer);
+//                System.out.println(list.get(i));
+//            }else {
+//                System.out.println("Sorry, that name isn't in your contacts");
+//            }
