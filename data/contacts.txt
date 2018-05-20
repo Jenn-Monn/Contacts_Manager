@@ -1,11 +1,4 @@
-
-jenn
-monica
-emily, 2452452
-nestor, 56789
-jaime, 45654 9452
-lina, 5635 4524 653
-, 
-george, 34242 52452 1
-, 
-trevor, 546 678 4356
+Jaime             | 347 895 6785 |  
+Monica              | 347 305 9095 |  
+Miriam             | 347 894 5678 |  
+Travis             | 210 567 8954 |  
