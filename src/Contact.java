@@ -17,9 +17,9 @@ public class Contact {
         return number;
     }
 
-    public String toString(){
-        return this.name + " |  " + this.number + " |  ";
-    }
+//    public String toString(){
+//        return this.name + " |  " + this.number + " |  ";
+//    }
 
 }
 

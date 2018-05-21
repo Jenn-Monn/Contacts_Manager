@@ -68,7 +68,7 @@ public class FileIO {
             name = input.getString("Please input the contact you want to add to the list: ");
             number = input.getString("Please add the phone number for this contact: ");
             Contact contact = new Contact(name, number);
-            fullInfo = contact.name + "             | " + contact.number + " |  ";
+            fullInfo = contact.name + "           | " + contact.number + " |  ";
             list.add(fullInfo);
         } while (input.yesNo("Do you want to add another contact to the list [yes/no]: "));
         writeContactsToFile(list, "data", "contacts.txt");
@@ -96,7 +96,7 @@ public class FileIO {
         List<String> list = Files.readAllLines(filepath);
         inputUser = input.getString("Enter the contact you want to delete");
         for(String contact: list){
-            if(contact.trim().toLowerCase().contains(inputUser)){
+            if(contact.trim().toLowerCase().contains(inputUser.toLowerCase())){
                 list.remove(contact);
                 System.out.println("Contact " + contact +  " deleted");
                 noWriteContactsToFile(list, "data", "contacts.txt");
